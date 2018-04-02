@@ -1,11 +1,12 @@
-#!/usr/bin/env python
 # -*- coding:utf-8 -*-
 
 from __future__ import absolute_import, division, print_function
 
 import logging
-import logging.handlers
+from logging import StreamHandler
 import sys
+import os
+from .fluent_pilot import FluentPilot
 
 from .escape import _unicode, unicode_type, basestring_type
 
@@ -172,11 +173,47 @@ class LogFormatter(logging.Formatter):
         return formatted.replace("\n", "\n    ")
 
 
+class WithFluentHandler(StreamHandler):
+
+    def __init__(self):
+        StreamHandler.__init__(self)
+        self._fluent_host = os.getenv("LOG_FLUENT_HOST", None)
+        self._fluent_port = os.getenv("LOG_FLUENT_PORT", None)
+        self._fluent_app = os.getenv("LOG_FLUENT_APP", None)
+        self._fluent_tag = os.getenv("LOG_FLUENT_TAG", None)
+        if self._fluent_host:
+            self._fluentd = FluentPilot(host=self._fluent_host, port=self._fluent_port, app=self._fluent_app, tag=self._fluent_tag)
+        else:
+            self._fluentd = None
+
+    def flush(self):
+        StreamHandler.flush(self)
+
+    def close(self):
+        StreamHandler.close(self)
+        if self._fluentd:
+            self._fluentd.flush()
+
+    def emit(self, record):
+        """
+        Emit a record.
+        """
+        if self._fluentd:
+            try:
+                message = record.getMessage()
+                self._fluentd.pub(message)
+                StreamHandler.emit(self, record)
+            except Exception as e:
+                self.handleError(record)
+        else:
+            StreamHandler.emit(self, record)
+
+
 def enable_pretty_logging(logger, handler=None, color=True):
     """Turns on formatted logging output as configured.
     """
     if not handler:
-        channel = logging.StreamHandler()
+        channel = WithFluentHandler()
     else:
         channel = handler
     channel.setFormatter(LogFormatter(color=color))
