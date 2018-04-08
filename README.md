@@ -11,8 +11,8 @@ pretty_logger.debug("debug---sss")
 
 同时发到fluentd
 
-export FLUENT_HOST=127.0.0.1
-export FLUENT_PORT=24224
-export FLUENT_APP=pretty
-export FLUENT_TAG=log
+export LOG_FLUENT_HOST=127.0.0.1
+export LOG_FLUENT_PORT=24224
+export LOG_FLUENT_APP=pretty
+export LOG_FLUENT_TAG=log
 ```
