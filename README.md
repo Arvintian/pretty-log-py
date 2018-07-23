@@ -15,4 +15,6 @@ export LOG_FLUENT_HOST=127.0.0.1
 export LOG_FLUENT_PORT=24224
 export LOG_FLUENT_APP=pretty
 export LOG_FLUENT_TAG=log
+
+// send an event record with 'pretty.log'
 ```
