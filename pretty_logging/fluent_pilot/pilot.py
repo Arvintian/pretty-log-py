@@ -23,7 +23,8 @@ class FluentPilot(object):
                     break
                 try:
                     msg = self.__msg_queue.get()
-                    if msg == "\n":
+                    msg = msg.strip()
+                    if not msg:
                         continue
                     pet = {
                         "log": msg

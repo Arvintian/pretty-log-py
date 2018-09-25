@@ -9,10 +9,10 @@ os.chdir(os.path.dirname(sys.argv[0]) or ".")
 here = os.path.abspath(os.path.dirname(__file__))
 
 setup_args = dict(
-    name='pretty_logging',
-    version='0.0.2',
+    name='pretty-logging',
+    version='1.0.0',
     description='pretty logging',
-    author='v87.us',
+    author='arvin',
     license='WTF',
     url='https://git.v87.us/tianweiguo/pretty-log-py',
     author_email='tianweiguo@renaissance-era.com',
