@@ -10,7 +10,7 @@ here = os.path.abspath(os.path.dirname(__file__))
 
 setup_args = dict(
     name='pretty-logging',
-    version='1.0.0',
+    version='1.0.1',
     description='pretty logging',
     author='arvin',
     license='MIT',
