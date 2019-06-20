@@ -5,7 +5,7 @@ build:
 
 publish:
 	@rm -rf dist || true
-	python setup.py egg_info --egg-base /tmp sdist upload -r v87
+	python setup.py egg_info --egg-base /tmp sdist upload -r pypi
 
 clean:
 	@rm -rf dist

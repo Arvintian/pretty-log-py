@@ -13,9 +13,9 @@ setup_args = dict(
     version='1.0.0',
     description='pretty logging',
     author='arvin',
-    license='WTF',
-    url='https://git.v87.us/tianweiguo/pretty-log-py',
-    author_email='tianweiguo@renaissance-era.com',
+    license='MIT',
+    url='https://github.com/Arvintian/pretty-log-py',
+    author_email='arvintian8@gamil.com',
     packages=find_packages(),
     include_package_data=True
 )
